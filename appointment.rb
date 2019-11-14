@@ -18,6 +18,14 @@ def home_page
   puts "1.Create\n2.View\n3.Delete\n4.Exit\n\n"
   puts '**********************'
 end
+def check_availability(doctor_name,date,time,appointments)
+    appointments.each do|app|
+      if app.doctor_name == doctor_name && app.date == date && app.time == time
+        return false
+      end
+    end
+    return true
+  end
 appointments = []
 while true
 home_page
@@ -35,7 +43,8 @@ when "Create"
   puts 'What time would you like to make an appointment (follow hh:mm format)'#validation :only 9to5 and time should be9:15,9:30..
   time = gets.chomp.to_i
    ###check availability -to do
-   puts 'Enter your full name'
+   if check_availability(doctor_name,date,time,appointments)
+    puts 'Enter your full name'
     full_name = gets.chomp
     puts 'Enter your date of birth (follow dd/mm/yyyy format)'
     dob = gets.chomp
@@ -54,6 +63,9 @@ when "Create"
     puts app.dob
     puts app.medicare_num
     puts app.mobile_num
+    end
+   else
+    puts "slot not available on that time.try another slot"
   end
 when "Exit"
     exit
