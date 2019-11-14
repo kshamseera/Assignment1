@@ -10,7 +10,9 @@ class Appointment
   @medicare_num = medicare_num
   end
 end
+
 doctor_list = ['Lucy', 'Peter', 'John', 'Sarah']
+
 def home_page
   puts  "\n********Home Page*************\n\n"
   puts "Welcome to Easy Doctor Appointment\n\n"
@@ -18,6 +20,7 @@ def home_page
   puts "1.Create\n2.View\n3.Delete\n4.Exit\n\n"
   puts '**********************'
 end
+
 def check_availability(doctor_name,date,time,appointments)
     appointments.each do|app|
       if app.doctor_name == doctor_name && app.date == date && app.time == time
@@ -25,7 +28,16 @@ def check_availability(doctor_name,date,time,appointments)
       end
     end
     return true
-  end
+end
+
+def get_view_details(date,appointments)
+    appointments.each do |app|
+      if app.date == date
+       puts "#{appointments}"
+      end
+    end
+       puts "\nSorry..!! No appointments for that day"
+end
 appointments = []
 while true
 home_page
@@ -69,5 +81,10 @@ when "Create"
   end
 when "Exit"
     exit
-  end
-  end
+when "View"
+  puts 'Enter the date that you would like to view'
+  date = gets.chomp
+  get_view_details(date,appointments)
+end
+end
+
