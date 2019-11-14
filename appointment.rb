@@ -32,11 +32,12 @@ end
 
 def get_view_details(date,appointments)
     appointments.each do |app|
-      if app.date == date
-       puts "#{appointments}"
-      end
+    if app.date == date
+      puts "\nDoctor: #{app.doctor_name} Patient_Name: #{app.full_name} Date: #{app.date} Time: #{app.time}"
+    else
+      puts "\nSorry..!! No appointments for that day"
     end
-       puts "\nSorry..!! No appointments for that day"
+end
 end
 appointments = []
 while true
