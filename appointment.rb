@@ -1,3 +1,4 @@
+require 'tty-prompt'
 class Appointment
   attr_accessor :doctor_name, :date, :time, :full_name, :mobile_num, :dob, :medicare_num
   def initialize(date,doctor_name,time,full_name,dob,mobile_num,medicare_num)
@@ -16,8 +17,8 @@ doctor_list = ['Lucy', 'Peter', 'John', 'Sarah']
 def home_page
   puts  "\n********Home Page*************\n\n"
   puts "Welcome to Easy Doctor Appointment\n\n"
-  puts "What would you like to do?\n\n"
-  puts "1.Create\n2.View\n3.Delete\n4.Exit\n\n"
+#   puts "What would you like to do?\n\n"
+#   puts "1.Create\n2.View\n3.Delete\n4.Exit\n\n"
   puts '**********************'
 end
 
@@ -33,16 +34,17 @@ end
 def get_view_details(date,appointments)
     appointments.each do |app|
     if app.date == date
-      puts "\nDoctor: #{app.doctor_name} Patient_Name: #{app.full_name} Date: #{app.date} Time: #{app.time}"
+      puts "\nDoctor: #{app.doctor_name} | Patient_Name: #{app.full_name} | Date: #{app.date} | Time: #{app.time}"
     else
       puts "\nSorry..!! No appointments for that day"
     end
-end
+  end
 end
 appointments = []
 while true
 home_page
-option = gets.chomp.capitalize
+prompt = TTY::Prompt.new
+option =prompt.select("what would you like to do",["Create", "View", "Delete" ,"Exit"])
 case option
 when "Create"
   puts 'Which date would you like to make the appointment (follow dd/mm/yyyy format)'
@@ -68,22 +70,22 @@ when "Create"
     puts "Thank you.Appointment is confirmed with below details.\nName:#{full_name}\nDoctor:#{doctor_name}\nDate:#{date}\nTime:#{time}"
     appointment =Appointment.new(date,doctor_name,time,full_name,dob,medicare_num,mobile_num)
     appointments << appointment
-    appointments.each do |app|
-    puts app.date
-    puts app.doctor_name
-    puts app.time
-    puts app.full_name
-    puts app.dob
-    puts app.medicare_num
-    puts app.mobile_num
-    end
+    # appointments.each do |app|
+    # puts app.date
+    # puts app.doctor_name
+    # puts app.time
+    # puts app.full_name
+    # puts app.dob
+    # puts app.medicare_num
+    # puts app.mobile_num
+    # end
    else
     puts "slot not available on that time.try another slot"
   end
 when "Exit"
     exit
 when "View"
-  puts 'Enter the date that you would like to view'
+  puts "\nEnter the date would you like to view\n"
   date = gets.chomp
   get_view_details(date,appointments)
 end
