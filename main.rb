@@ -5,7 +5,6 @@ require_relative 'appointment-class'
 
 doctor_list = %w[Lucy Peter John Sarah]
 
-
 def home_page
   puts "\n********Home Page*************\n\n"
   puts "Welcome to Easy Doctor Appointment\n\n"
@@ -14,14 +13,14 @@ end
 
 def create_details(doctor_name, date, time)
   puts 'Enter your full name'
-      full_name = gets.chomp
-      puts 'Enter your date of birth (follow dd/mm/yyyy format)'
-      dob = gets.chomp
-      puts 'Enter your medicare number'
-      medicare_num = gets.chomp
-      puts 'Enter your mobile number'
-      mobile_num = gets.chomp
-      appointment = Appointment.new(doctor_name,date,time,full_name, dob, medicare_num, mobile_num)
+  full_name = gets.chomp
+  puts 'Enter your date of birth (follow dd/mm/yyyy format)'
+  dob = gets.chomp
+  puts 'Enter your medicare number'
+  medicare_num = gets.chomp
+  puts 'Enter your mobile number'
+  mobile_num = gets.chomp
+  appointment = Appointment.new(doctor_name, date, time, full_name, dob, medicare_num, mobile_num)
 end
 # check availability
 
@@ -44,22 +43,23 @@ def view_details(date, appointments)
    end
   end
 end
+
 # Delete appointment
 def delete_appointment(doctor_name, date, time, appointments)
   appointments.each do |app|
-   appointments.delete_if {app.doctor_name == doctor_name && app.date == date && app.time == time}
+    appointments.delete_if { app.doctor_name == doctor_name && app.date == date && app.time == time }
   end
 end
 
 def save_and_exit(appointments)
   File.open('details.txt', 'a') do |f|
     appointments.each do |element|
-      f.write(element.date + ", ") 
-      f.write(element.doctor_name + ", ")
-      f.write(element.time + ", ") 
-      f.write(element.full_name + ", ") 
-      f.write(element.dob + ", ") 
-      f.write(element.medicare_num + ", ")
+      f.write(element.date + ', ')
+      f.write(element.doctor_name + ', ')
+      f.write(element.time + ', ')
+      f.write(element.full_name + ', ')
+      f.write(element.dob + ', ')
+      f.write(element.medicare_num + ', ')
       f.write(element.mobile_num + "\n")
     end
   end
@@ -67,14 +67,15 @@ end
 appointments = []
 # read file
 def display_records
-file = 'details.txt'
-File.read(file).each_line do |line|
-  arr= line.split("\n")
-  puts arr
+  file = 'details.txt'
+  File.read(file).each_line do |line|
+    arr = line.split("\n")
+    puts arr
+  end
 end
-end
-display_records
 loop do
+  puts "\n\n Appointments Record.."
+  display_records
   home_page
   prompt = TTY::Prompt.new
   option = prompt.select('what would you like to do', %w[Create View Delete Exit])
@@ -92,7 +93,7 @@ loop do
     if check_availability(doctor_name, date, time, appointments)
       appointments << create_details(doctor_name, date, time)
       puts "Thank you.Appointment is confirmed with below details.\n\nName:#{appointments.last.full_name} | Doctor:#{doctor_name}| Date:#{date}\| Time:#{time}"
-      
+
     else
       puts 'slot not available on that time.try another slot'
     end
@@ -101,8 +102,8 @@ loop do
     doctor_name = gets.chomp
     date = gets.chomp
     time = gets.chomp
-    delete_appointment(doctor_name,date,time,appointments)
-    puts 'Deleted'
+    delete_appointment(doctor_name, date, time, appointments)
+    puts 'Appointment Deleted'
   when 'Exit'
     save_and_exit(appointments)
     exit
