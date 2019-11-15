@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'tty-font'
 require 'tty-prompt'
 require_relative 'appointment-class'
 
@@ -54,8 +54,8 @@ end
 def save_and_exit(appointments)
   File.open('details.txt', 'a') do |f|
     appointments.each do |element|
-      f.write(element.date + ', ')
       f.write(element.doctor_name + ', ')
+      f.write(element.date + ', ')
       f.write(element.time + ', ')
       f.write(element.full_name + ', ')
       f.write(element.dob + ', ')
@@ -66,16 +66,20 @@ def save_and_exit(appointments)
 end
 appointments = []
 # read file
-def display_records
-  file = 'details.txt'
-  File.read(file).each_line do |line|
-    arr = line.split("\n")
-    puts arr
-  end
-end
+# def display_records(appointments)
+#   file = 'details.txt'
+#   File.open(file, 'r').each do |line|
+#     arr = line.split(',')
+#     a1 = Appointment.new(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6])
+#     appointments << a1
+#   end
+#   puts "#{appointments}"
+#   puts appointments.length
+# end
+
 loop do
-  puts "\n\n Appointments Record.."
-  display_records
+  puts "\n\nAppointments Record..\n\n"
+  #display_records(appointments)
   home_page
   prompt = TTY::Prompt.new
   option = prompt.select('what would you like to do', %w[Create View Delete Exit])
