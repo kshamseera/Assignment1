@@ -1,85 +1,17 @@
 # frozen_string_literal: true
+
 require 'tty-font'
 require 'tty-prompt'
 require_relative 'appointment-class'
+require_relative 'methods'
 
 doctor_list = %w[Lucy Peter John Sarah]
 
-def home_page
-  puts "\n********Home Page*************\n\n"
-  puts "Welcome to Easy Doctor Appointment\n\n"
-  puts '**********************'
-end
-
-def create_details(doctor_name, date, time)
-  puts 'Enter your full name'
-  full_name = gets.chomp
-  puts 'Enter your date of birth (follow dd/mm/yyyy format)'
-  dob = gets.chomp
-  puts 'Enter your medicare number'
-  medicare_num = gets.chomp
-  puts 'Enter your mobile number'
-  mobile_num = gets.chomp
-  appointment = Appointment.new(doctor_name, date, time, full_name, dob, medicare_num, mobile_num)
-end
-# check availability
-
-def check_availability(doctor_name, date, time, appointments)
-  appointments.each do |app|
-    if app.doctor_name == doctor_name && app.date == date && app.time == time
-      return false
-    end
-  end
-  true
-end
-# view details
-
-def view_details(date, appointments)
-  appointments.each do |app|
-    if app.date == date
-      puts "\nDoctor: #{app.doctor_name} | Patient_Name: #{app.full_name} | Date: #{app.date} | Time: #{app.time}"
-    else
-      puts "\nSorry..!! No appointments for that day"
-   end
-  end
-end
-
-# Delete appointment
-def delete_appointment(doctor_name, date, time, appointments)
-  appointments.each do |app|
-    appointments.delete_if { app.doctor_name == doctor_name && app.date == date && app.time == time }
-  end
-end
-
-def save_and_exit(appointments)
-  File.open('details.txt', 'a') do |f|
-    appointments.each do |element|
-      f.write(element.doctor_name + ', ')
-      f.write(element.date + ', ')
-      f.write(element.time + ', ')
-      f.write(element.full_name + ', ')
-      f.write(element.dob + ', ')
-      f.write(element.medicare_num + ', ')
-      f.write(element.mobile_num + "\n")
-    end
-  end
-end
 appointments = []
-# read file
-# def display_records(appointments)
-#   file = 'details.txt'
-#   File.open(file, 'r').each do |line|
-#     arr = line.split(',')
-#     a1 = Appointment.new(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6])
-#     appointments << a1
-#   end
-#   puts "#{appointments}"
-#   puts appointments.length
-# end
+
+#load_records(appointments)
 
 loop do
-  puts "\n\nAppointments Record..\n\n"
-  #display_records(appointments)
   home_page
   prompt = TTY::Prompt.new
   option = prompt.select('what would you like to do', %w[Create View Delete Exit])
@@ -114,6 +46,10 @@ loop do
   when 'View'
     puts "\nEnter the date would you like to view\n"
     date = gets.chomp
-    view_details(date, appointments)
+    if view_details(date, appointments)
+      puts "\nDoctor: #{appointments.doctor_name} | Patient_Name: #{appointments.full_name} | Date: #{appointments.date} | Time: #{appointments.time}"
+    else
+      puts 'sorry! No appointments is there to view'
+    end
   end
 end
