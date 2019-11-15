@@ -31,18 +31,24 @@ def check_availability(doctor_name, date, time, appointments)
 
 # view details
 def view_details(date, appointments)
+  match_found_flag = false
   appointments.each do |app|
-    return true if app.date == date
+    if app.date == date
+      match_found_flag = true
+      puts "\nDoctor: #{app.doctor_name} | Patient_Name: #{app.full_name} | Date: #{app.date} | Time: #{app.time}"
+    end
   end
-  false
+  puts 'Sorry! No appointments is there to view' unless match_found_flag
   end
 
 # Delete appointment
 def delete_appointment(doctor_name, date, time, appointments)
   appointments.each do |app|
-    appointments.delete_if { app.doctor_name == doctor_name && app.date == date && app.time == time }
+    if app.doctor_name == doctor_name && app.date == date && app.time == time
+      appointments.delete(app)
   end
   end
+end
 
 # when exit..
 def save_and_exit(appointments)
@@ -58,13 +64,9 @@ def load_records(appointments)
   file = 'details.txt'
   File.readlines(file).each do |line|
     arr = line.chomp.split(',')
-    if arr.length < 7
-      puts 'Skipping line because not enough data'
-    else
-      a1 = Appointment.new(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6])
-      appointments << a1
-    end
+    a1 = Appointment.new(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6])
+    appointments << a1
   end
   puts appointments.to_s
   puts appointments.length
-  end
+end

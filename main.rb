@@ -9,7 +9,7 @@ doctor_list = %w[Lucy Peter John Sarah]
 
 appointments = []
 
-#load_records(appointments)
+load_records(appointments)
 
 loop do
   home_page
@@ -46,10 +46,6 @@ loop do
   when 'View'
     puts "\nEnter the date would you like to view\n"
     date = gets.chomp
-    if view_details(date, appointments)
-      puts "\nDoctor: #{appointments.doctor_name} | Patient_Name: #{appointments.full_name} | Date: #{appointments.date} | Time: #{appointments.time}"
-    else
-      puts 'sorry! No appointments is there to view'
-    end
+    view_details(date, appointments)
   end
 end
