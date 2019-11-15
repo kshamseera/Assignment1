@@ -44,9 +44,14 @@ def view_details(date, appointments)
    end
   end
 end
+# Delete appointment
+def delete_appointment(doctor_name, date, time, appointments)
+  appointments.each do |app|
+   appointments.delete_if {app.doctor_name == doctor_name && app.date == date && app.time == time}
+  end
+end
 
 def save_and_exit(appointments)
-  # File.open('details.txt', 'w+') do |f|
   File.open('details.txt', 'a') do |f|
     appointments.each do |element|
       f.write(element.date + ", ") 
@@ -61,12 +66,14 @@ def save_and_exit(appointments)
 end
 appointments = []
 # read file
+def display_records
 file = 'details.txt'
 File.read(file).each_line do |line|
-  arr= line.split(",")
+  arr= line.split("\n")
   puts arr
 end
-
+end
+display_records
 loop do
   home_page
   prompt = TTY::Prompt.new
@@ -90,7 +97,12 @@ loop do
       puts 'slot not available on that time.try another slot'
     end
   when 'Delete'
-
+    puts 'Please enter doctor name, date and time to delete appointment'
+    doctor_name = gets.chomp
+    date = gets.chomp
+    time = gets.chomp
+    delete_appointment(doctor_name,date,time,appointments)
+    puts 'Deleted'
   when 'Exit'
     save_and_exit(appointments)
     exit
