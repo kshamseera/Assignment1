@@ -11,7 +11,9 @@ doctor_list = %w[Lucy Peter John Sarah]
 appointments = []
 
 load_records(appointments)
-
+def gets
+  STDIN.gets
+ end
 loop do
   home_page
   booking_time
