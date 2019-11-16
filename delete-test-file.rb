@@ -4,7 +4,7 @@ require_relative 'appointment-class'
 # require_relative 'main'
 require_relative 'methods'
 
-def test1_check_availability
+def test1_delete
   fake_list = []
   actual_doctor_name = 'peter'
   actual_date = '12/4/2019'
@@ -18,14 +18,14 @@ def test1_check_availability
 
   appointment = Appointment.new(actual_doctor_name, actual_date, actual_time, full_name, dob, mobile_num)
   fake_list << appointment
-  if check_availability(expected_doctor_name, expected_date, expected_time, fake_list) == true
+  if delete_appointment(expected_doctor_name, expected_date, expected_time, fake_list) == true
     puts 'pass'
   else
     puts 'fail'
    end
 end
 
-def test2_check_availability
+def test2_delete
   fake_list = []
   actual_doctor_name = 'peter'
   actual_date = '12/4/2019'
@@ -39,12 +39,12 @@ def test2_check_availability
 
   appointment = Appointment.new(actual_doctor_name, actual_date, actual_time, full_name, dob, mobile_num)
   fake_list << appointment
-  if check_availability(expected_doctor_name, expected_date, expected_time, fake_list) == false
+  if delete_appointment(expected_doctor_name, expected_date, expected_time, fake_list) == false
     puts 'pass'
   else
     puts 'fail'
       end
   end
 
-test1_check_availability
-test2_check_availability
+test1_delete
+test2_delete
