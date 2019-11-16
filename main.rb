@@ -14,6 +14,7 @@ load_records(appointments)
 
 loop do
   home_page
+  booking_time
   prompt = TTY::Prompt.new
   option = prompt.select('what would you like to do', %w[Create View Delete Exit])
   case option

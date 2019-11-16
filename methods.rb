@@ -68,3 +68,9 @@ def load_records(appointments)
   puts appointments.to_s
   puts appointments.length
 end
+
+def booking_time
+  ARGV.each do |arg|
+    puts 'Available booking time: 9 to 5'.colorize(:red) if arg == '--time'
+  end
+end
