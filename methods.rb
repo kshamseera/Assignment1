@@ -2,7 +2,7 @@
 
 def home_page
   puts "\n********Home Page*************\n\n"
-  puts "Welcome to Easy Doctor Appointment\n\n"
+  puts "Welcome to Easy Doctor Appointment\n\n".colorize(:cyan)
   puts '**********************'
   end
 
@@ -44,29 +44,40 @@ def delete_appointment(doctor_name, date, time, appointments)
   appointments.each do |app|
     if app.doctor_name == doctor_name && app.date == date && app.time == time
       appointments.delete(app)
+      return false
   end
   end
+  true
 end
 
 # when exit..write in to file
+
 def save_and_exit(appointments)
-  File.open('details.txt', 'w') do |f|
-    appointments.each do |element|
-      f.puts("#{element.doctor_name},#{element.date},#{element.time},#{element.full_name},#{element.dob},#{element.mobile_num}")
+  begin
+    File.open('details.txt', 'w') do |f|
+      appointments.each do |element|
+        f.puts("#{element.doctor_name},#{element.date},#{element.time},#{element.full_name},#{element.dob},#{element.mobile_num}")
+      end
     end
+  rescue StandardError => exception
+    puts "failed to save #{exception}"
   end
 end
 
 # read file
 def load_records(appointments)
+  begin
   file = 'details.txt'
   File.readlines(file).each do |line|
     arr = line.chomp.split(',')
     a1 = Appointment.new(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5])
     appointments << a1
   end
+rescue StandardError => exception
+  puts "failed to load #{exception}"
   puts appointments.to_s
   puts appointments.length
+end
 end
 
 def booking_time
