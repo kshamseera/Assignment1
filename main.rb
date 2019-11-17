@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require 'TTY-font'
 require 'TTY-prompt'
 require 'colorize'
-# require ‘pastel’
+require 'pastel'
 # font = TTY::Font.new(:doom)
 # puts font.write(“WELCOME”)
 # pastel = Pastel.new
@@ -23,43 +22,38 @@ def gets
 loop do
   home_page
   prompt = TTY::Prompt.new
-  option = prompt.select("\nwhat would you like to do", %w[Create View Delete Exit])
+  option = prompt.select('CHOICE: '.colorize(:cyan), %w[Create View Delete Exit])
   case option
   when 'Create'
-    puts 'Which date would you like to make the appointment (follow dd/mm/yyyy format)'.colorize(:cyan)
-    date = gets.chomp
-    # puts 'Which doctor would you like to make the appointment with? Available doctors are:'.colorize(:cyan)
-    doctor_name = prompt.select('Please select the doctor', %w[Lucy Peter John Sarah])
-    # doctor_list.each do |doc|
-    #   puts doc
-    # end
-    # doctor_name = gets.chomp.capitalize
-    puts 'What time would you like to make an appointment (follow hh:mm format)'.colorize(:cyan)
-    time = gets.chomp
-    if time < '9' || time > 5
-      puts 'sorry! available booking time :9:00 -5:00'.colorize(:magenta)
-      puts 'Please enter another time'.colorize(:cyan)
-      time = gets.chomp
+    # name = prompt.ask("What is your name?")
+    date = prompt.ask('Which date would you like to make the appointment (follow dd/mm/yyyy format)'.colorize(:cyan))
+    doctor_name = prompt.select('Please select the doctor'.colorize(:cyan), %w[Lucy Peter John Sarah])
+    time = prompt.ask('What time would you like to make an appointment (follow hh:mm format)'.colorize(:cyan)).to_i
+    # time = time.to_i
+    if time <= 9 || time >= 5
+      puts 'sorry! available booking time :9:00 AM - 5:00 PM '.colorize(:red)
+      time = prompt.ask('Please enter another time'.colorize(:cyan))
     end
     if check_availability(doctor_name, date, time, appointments)
       appointments << create_details(doctor_name, date, time)
       puts "Thank you.Appointment is confirmed with below details.\n\nName:#{appointments.last.full_name} | Doctor:#{doctor_name}|Date:#{date}\| Time:#{time}".colorize(:green)
     else
-      puts 'slot not available on that time.try another slot'
+      puts 'slot not available on that time.try another slot'.colorize(:red)
     end
   when 'Delete'
-    puts 'Please enter doctor name, date and time to delete appointment'.colorize(:cyan)
-    doctor_name = gets.chomp
-    date = gets.chomp
-    time = gets.chomp
-    delete_appointment(doctor_name, date, time, appointments)
-    puts 'Appointment Deleted'.colorize(:red)
+    doctor_name = prompt.ask('Please enter the doctor name to delete the appointment').colorize(:cyan)
+    date = prompt.ask('Please enter the date to delete the appointment').colorize(:cyan)
+    time = prompt.ask('Please enter the time to delete the appointment').colorize(:cyan)
+    if delete_appointment(doctor_name, date, time, appointments)
+      puts 'Appointment Deleted'.colorize(:green)
+    else
+      puts 'No matching appointment found.Delete failed !'.colorize(:red)
+    end
   when 'Exit'
     save_and_exit(appointments)
     exit
   when 'View'
-    puts "\nEnter the date would you like to view".colorize(:cyan)
-    date = gets.chomp
+    date = prompt.ask("Enter the date would you like to view".colorize(:cyan))
     view_details(date, appointments)
   end
 end

@@ -1,20 +1,20 @@
 # frozen_string_literal: true
+require 'TTY-prompt'
+require 'colorize'
 
 def home_page
   puts "\n\nWELCOME TO EASY DOCTOR APPOINTMENT\n".colorize(:yellow)
   ARGV.each do |arg|
-    puts "\nAvailable booking time: 9 to 5".colorize(:red) if arg == '--time'
+    puts "\nAVAILABLE BOOKING TIME: 9:00 AM - 5:00 PM\n".colorize(:red) if arg == '--time'
   end
   end
 
 # create appointment
 def create_details(doctor_name, date, time)
-  puts 'Enter your full name'.colorize(:cyan)
-  full_name = gets.chomp
-  puts 'Enter your date of birth (follow dd/mm/yyyy format)'.colorize(:cyan)
-  dob = gets.chomp
-  puts 'Enter your mobile number'.colorize(:cyan)
-  mobile_num = gets.chomp
+  prompt = TTY::Prompt.new
+  full_name = prompt.ask("Enter your full name".colorize(:cyan))
+  dob = prompt.ask("Enter your date of birth (follow dd/mm/yyyy format)".colorize(:cyan))
+  mobile_num = prompt.ask("Enter your mobile number".colorize(:cyan))
   appointment = Appointment.new(doctor_name, date, time, full_name, dob, mobile_num)
   end
 
@@ -34,10 +34,10 @@ def view_details(date, appointments)
   appointments.each do |app|
     if app.date == date
       match_found_flag = true
-      puts "\nDoctor: #{app.doctor_name} | Patient_Name: #{app.full_name} | Date: #{app.date} | Time: #{app.time}"
+      puts ("\nDoctor: #{app.doctor_name} | Patient_Name: #{app.full_name} | Date: #{app.date} | Time: #{app.time}").colorize(:green)
     end
   end
-  puts 'Sorry! No appointments is there to view' unless match_found_flag
+  puts ("\nSorry! No appointments is there to view").colorize(:light_red) unless match_found_flag
   end
 
 # Delete appointment
@@ -77,8 +77,3 @@ rescue StandardError => e
   puts appointments.length
 end
 
-# def booking_time
-#   ARGV.each do |arg|
-#     puts "\nAvailable booking time: 9 to 5".colorize(:red) if arg == '--time'
-#   end
-# end
