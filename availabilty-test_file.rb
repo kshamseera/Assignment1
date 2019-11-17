@@ -4,7 +4,7 @@ require_relative 'appointment-class'
 # require_relative 'main'
 require_relative 'methods'
 
-def test1_check_availability
+def check_availability_available_scenario
   fake_list = []
   actual_doctor_name = 'peter'
   actual_date = '12/4/2019'
@@ -25,7 +25,7 @@ def test1_check_availability
    end
 end
 
-def test2_check_availability
+def check_availability_not_available_scenario
   fake_list = []
   actual_doctor_name = 'peter'
   actual_date = '12/4/2019'

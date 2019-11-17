@@ -4,7 +4,7 @@ require_relative 'appointment-class'
 # require_relative 'main'
 require_relative 'methods'
 
-def test1_delete
+def not_delete_file_scenario
   fake_list = []
   actual_doctor_name = 'peter'
   actual_date = '12/4/2019'
@@ -25,7 +25,7 @@ def test1_delete
    end
 end
 
-def test2_delete
+def delete_file_scenario
   fake_list = []
   actual_doctor_name = 'peter'
   actual_date = '12/4/2019'
