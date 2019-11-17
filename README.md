@@ -1,2 +1,7 @@
-# Shamsi's Term1 Assignment1 
-Here is my assighnment
+
+# Assessment 2: Plan and Implement a Terminal Application
+----
+## Easy Doctor Appointment
+---
+
+
