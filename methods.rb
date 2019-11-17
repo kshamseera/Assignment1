@@ -5,7 +5,6 @@ require 'colorize'
 require 'TTY-font'
 
 def home_page
-  
   # font = TTY::Font.new(:doom)
   # # puts font.write(“WELCOME”)
   # pastel = Pastel.new
@@ -43,6 +42,7 @@ def view_details(date, appointments)
   appointments.each do |app|
     if app.date == date
       match_found_flag = true
+      puts "\nAvailable Appointments :".colorize(:magenta)
       puts "\nDoctor: #{app.doctor_name} | Patient_Name: #{app.full_name} | Date: #{app.date} | Time: #{app.time}".colorize(:green)
     end
   end
