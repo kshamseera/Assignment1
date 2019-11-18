@@ -2,29 +2,19 @@
 
 require 'TTY-prompt'
 require 'colorize'
-require 'TTY-font'
 
 def home_page
-  # font = TTY::Font.new(:doom)
-  # # puts font.write(“WELCOME”)
-  # pastel = Pastel.new
-  # puts pastel.yellow(font.write(“DOOM”))
   puts "\n\nWELCOME TO EASY DOCTOR APPOINTMENT\n".colorize(:yellow)
-  ARGV.each do |arg|
-    if arg == '--time'
-      puts "\nAVAILABLE BOOKING TIME: 9:00 AM - 5:00 PM\n".colorize(:red)
-    end
-  end
-  end
+end
 
 # create appointment
 def create_details(doctor_name, date, time)
   prompt = TTY::Prompt.new
-  full_name = prompt.ask('Enter your full name'.colorize(:cyan))
-  dob = prompt.ask('Enter your date of birth (follow dd/mm/yyyy format)'.colorize(:cyan))
-  mobile_num = prompt.ask('Enter your mobile number'.colorize(:cyan))
+  full_name = prompt.ask("Enter your full name".colorize(:cyan),required: true)
+  dob = prompt.ask('Enter your date of birth (follow dd/mm/yyyy format)'.colorize(:cyan),required: true)
+  mobile_num = prompt.ask('Enter your mobile number'.colorize(:cyan),required: true)
   appointment = Appointment.new(doctor_name, date, time, full_name, dob, mobile_num)
-  end
+end
 
 # check availability
 def check_availability(doctor_name, date, time, appointments)
@@ -34,22 +24,22 @@ def check_availability(doctor_name, date, time, appointments)
     end
   end
   true
-  end
+end
 
 # view details
 def view_details(date, appointments)
   match_found_flag = false
   appointments.each do |app|
-    if app.date == date
-      match_found_flag = true
-      puts "\nAvailable Appointments :".colorize(:magenta)
-      puts "\nDoctor: #{app.doctor_name} | Patient_Name: #{app.full_name} | Date: #{app.date} | Time: #{app.time}".colorize(:green)
-    end
+    next unless app.date == date
+
+    match_found_flag = true
+    puts "\nAvailable Appointments :".colorize(:magenta)
+    puts "\nDoctor: #{app.doctor_name} | Patient_Name: #{app.full_name} | Date: #{app.date} | Time: #{app.time}".colorize(:green)
   end
   unless match_found_flag
     puts "\nSorry! No appointments is there to view".colorize(:light_red)
   end
-  end
+end
 
 # Delete appointment
 def delete_appointment(doctor_name, date, time, appointments)
@@ -57,7 +47,7 @@ def delete_appointment(doctor_name, date, time, appointments)
     if app.doctor_name == doctor_name && app.date == date && app.time == time
       appointments.delete(app)
       return false
-  end
+    end
   end
   true
 end
@@ -83,7 +73,15 @@ def load_records(appointments)
     appointments << a1
   end
 rescue StandardError => e
-  puts "failed to load #{exception}"
+  puts "failed to load #{e}"
   puts appointments.to_s
   puts appointments.length
+end
+
+def time_flag
+  ARGV.each do |arg|
+    if arg == '--time'
+      puts "\nAVAILABLE BOOKING TIME: 9:00 AM - 5:00 PM\n".colorize(:red)
+    end
+  end
 end
