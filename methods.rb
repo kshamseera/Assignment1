@@ -81,7 +81,7 @@ end
 def time_flag
   ARGV.each do |arg|
     if arg == '--time'
-      puts "\nAVAILABLE BOOKING TIME: 9:00 AM - 5:00 PM\n".colorize(:red)
+      puts "\nAVAILABLE BOOKING TIME: 9:00 AM - 17:00 PM(24:00 hr format)\n".colorize(:red)
     end
   end
 end
