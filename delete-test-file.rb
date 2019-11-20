@@ -46,5 +46,5 @@ def delete_file_scenario
       end
   end
 
-test1_delete
-test2_delete
+  not_delete_file_scenario
+  delete_file_scenario

@@ -46,5 +46,5 @@ def check_availability_not_available_scenario
       end
   end
 
-test1_check_availability
-test2_check_availability
+  check_availability_available_scenario
+  check_availability_not_available_scenario
