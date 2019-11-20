@@ -8,7 +8,8 @@ require 'pastel'
 def home_page
   font = TTY::Font.new(:doom)
   pastel = Pastel.new
-  puts pastel.yellow(font.write('EASY DOCTOR APPOINTMENT'))
+  puts pastel.yellow(font.write('EASY  DOCTOR '))
+  puts pastel.yellow(font.write('APPOINTMENT'))
 end
 
 # create appointment
