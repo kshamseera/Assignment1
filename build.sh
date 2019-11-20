@@ -12,3 +12,5 @@ cp ./methods.rb ./dist
 # install required gems
 gem install colorize
 gem install tty-prompt
+gem install tty-font
+gem install pastel

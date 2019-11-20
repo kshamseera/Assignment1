@@ -8,8 +8,10 @@ require_relative 'methods'
 
 appointments = []
 
-start_time = ARGV[0].to_i || 5.00
-end_time = ARGV[1].to_i || 17.00
+start_time = ARGV[0] || 5.00
+start_time = start_time.to_i
+end_time = ARGV[1]|| 17.00
+end_time = end_time.to_i
 doctor_list = %w[Lucy Peter John Sarah]
 
 load_records(appointments)

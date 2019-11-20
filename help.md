@@ -24,6 +24,8 @@ Program accept optional arguments for start and end time. if no value specified 
 gems required in this application are:
 * colorize 
 * tty-prompt
+* tty-font
+* pastel
 for gem installation refer ``` ./build.sh```  file
 
 

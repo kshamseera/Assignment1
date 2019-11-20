@@ -2,9 +2,13 @@
 
 require 'TTY-prompt'
 require 'colorize'
+require 'tty-font'
+require 'pastel'
 
 def home_page
-  puts "\n\nWELCOME TO EASY DOCTOR APPOINTMENT\n".colorize(:yellow)
+  font = TTY::Font.new(:doom)
+  pastel = Pastel.new
+  puts pastel.yellow(font.write('EASY DOCTOR APPOINTMENT'))
 end
 
 # create appointment
