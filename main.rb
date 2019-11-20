@@ -19,40 +19,40 @@ load_records(appointments)
 def gets
   STDIN.gets
 end
+home_page
 loop do
-  home_page
   prompt = TTY::Prompt.new
   option = prompt.select('CHOICE: '.colorize(:cyan), %w[Create View Delete Exit])
   case option
   when 'Create'
     time = 0
     puts "\nAVAILABLE BOOKING TIME: #{start_time} - #{end_time} \n".colorize(:magenta)
-    date = prompt.ask('Which date would you like to make the appointment (follow dd/mm/yyyy format)'.colorize(:cyan), required: true)
-    doctor_name = prompt.select('Please select the doctor'.colorize(:cyan), doctor_list)
+    date = prompt.ask('Which Date Would You Like To Make The Appointment (follow dd/mm/yyyy format)'.colorize(:cyan), required: true)
+    doctor_name = prompt.select('Please Select The Doctor'.colorize(:cyan), doctor_list)
     loop do
-      time = prompt.ask('What time would you like to make an appointment (follow hh.mm format)'.colorize(:cyan), required: true).to_i
+      time = prompt.ask('What Time Would You Like To Make An Appointment (follow hh.mm format)'.colorize(:cyan), required: true).to_i
       if time < start_time || time > end_time
-        puts "sorry! available booking time #{start_time} - #{end_time}".colorize(:red)
+        puts "Sorry! Available Booking Time #{start_time} - #{end_time}".colorize(:red)
       else
         break
       end
     end
     if check_availability(doctor_name, date, time, appointments)
       appointments << create_details(doctor_name, date, time)
-      puts "\nThank you.Appointment is confirmed with below details\n".colorize(:magenta)
+      puts "\nThank You.Appointment Is Confirmed With Below Details\n".colorize(:magenta)
       puts "Name:#{appointments.last.full_name} | Doctor:#{doctor_name}|Date:#{date}\| Time:#{time}\n".colorize(:green)
     else
-      puts "\nSlot is not available on selected time. Please try another slot".colorize(:red)
+      puts "\nSlot Is Not Available On Selected Time. Please Try Another Slot".colorize(:red)
     end
   when 'View'
-    date = prompt.ask('Enter the date would you like to view'.colorize(:cyan), required: true)
+    date = prompt.ask('Enter The Date Would You Like To View'.colorize(:cyan), required: true)
     view_details(date, appointments)
   when 'Delete'
-    doctor_name = prompt.select('Please select the doctor to delete'.colorize(:cyan), doctor_list)
-    date = prompt.ask('Please enter the date to delete the appointment'.colorize(:cyan), required: true)
-    time = prompt.ask('Please enter the time to delete the appointment'.colorize(:cyan), required: true)
+    doctor_name = prompt.select('Please Select The Doctor To Delete'.colorize(:cyan), doctor_list)
+    date = prompt.ask('Please Enter The Date To Delete The Appointment'.colorize(:cyan), required: true)
+    time = prompt.ask('Please Enter The Time To Delete The Appointment'.colorize(:cyan), required: true)
     if delete_appointment(doctor_name, date, time, appointments)
-      puts 'No matching appointment found.Delete failed !'.colorize(:red)
+      puts 'No Matching Appointment Found.Delete Failed !'.colorize(:red)
     else
       puts 'Appointment Deleted'.colorize(:green)
     end

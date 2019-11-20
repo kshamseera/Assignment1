@@ -42,7 +42,7 @@ def view_details(date, appointments)
     puts "\nDoctor: #{app.doctor_name} | Patient_Name: #{app.full_name} | Date: #{app.date} | Time: #{app.time}".colorize(:green)
   end
   unless match_found_flag
-    puts "\nSorry! No appointments is there to view".colorize(:light_red)
+    puts "\nSorry! No Appointments Available To View".colorize(:light_red)
   end
 end
 
