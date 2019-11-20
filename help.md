@@ -1,15 +1,5 @@
-
-# Terminal Application - Easy Doctor Appointment 
-----
-
-Easy Doctor appointment is a terminal application to help doctors and clinics for hassle-free appointment booking of their patients. Main Feature of this application are create new appointment, view all appointments and delete appointment.
-
-
-This application is developed using ruby language.
-
-
 ### Installation 
-* Install ruby 2.5
+* Install ruby
 For Installation click here [ruby](https://www.ruby-lang.org/en/downloads/)
 
     ```
@@ -47,5 +37,3 @@ for gem installation refer ``` ./build.sh```  file
 * view
 * delete
 * exit 
-
-
