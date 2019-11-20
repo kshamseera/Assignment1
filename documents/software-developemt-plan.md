@@ -36,24 +36,24 @@ Last feature of the application is exit. If the user wants to exit the program, 
 
 When application starts, the user will be presented a home page with options to Create,View, Delete and Exit appointments. User can select any of the above option to proceed.
 
-![home_page](screenshots/home_page.png)
+![home_page](documents/../application-screenshots/home_page.png)
 
 * If user selects **Create** ,the system will ask for the details (Doctor,date and time) to make the appointments, also check the availability for the appointment. If the appointment is available then the system will ask for personal details ( Full Name, Date Of Birth, Mobile Number) finally the system will display appointment confirmation message. 
 
 
 
 * If the appointment slot is not available then the system will display the error message. 
-![create_page](screenshots/create.png)
+![create_page](documents/../application-screenshots/create.png)
 
 * If the user select **View** option from the home page, user is prompted to enter the date. When the user enters the date, the system will search for all the appointments for that date and display all the appointments for that day to the user.
 * No available Appointment message is shown if no appointment is available on the selected day
   
-![view_page](screenshots/view.png)
+![view_page](documents/../application-screenshots/view.png)
 
 
 * If the user selects the **Delete** option from the home page, user is prompted to enter the doctor name, date and time. Once user enters the details then the system will delete the appointment from the system and shown success message to user. Error message is shown if no matching appointment is available to delete.
 
-![delete_page](screenshots/delete.png)
+![delete_page](documents/../application-screenshots/delete.png)
 
 ## Control Flow Diagram:
 
