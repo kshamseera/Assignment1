@@ -21,7 +21,7 @@ Program accept optional arguments for start and end time. if no value specified 
 
 ### Dependencies
 
-gems required in the applications are:
+gems required in this application are:
 * colorize 
 * tty-prompt
 for gem installation refer ``` ./build.sh```  file
@@ -33,7 +33,7 @@ for gem installation refer ``` ./build.sh```  file
 
 ### Features
 
-* create 
-* view
-* delete
-* exit 
+* Create 
+* View
+* Delete
+* Exit 

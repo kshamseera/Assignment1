@@ -10,14 +10,15 @@ appointments = []
 
 start_time = ARGV[0].to_i || 5.00
 end_time = ARGV[1].to_i || 17.00
+doctor_list = %w[Lucy Peter John Sarah]
 
 load_records(appointments)
 
 def gets
   STDIN.gets
 end
-home_page
 loop do
+  home_page
   prompt = TTY::Prompt.new
   option = prompt.select('CHOICE: '.colorize(:cyan), %w[Create View Delete Exit])
   case option
@@ -25,7 +26,7 @@ loop do
     time = 0
     puts "\nAVAILABLE BOOKING TIME: #{start_time} - #{end_time} \n".colorize(:magenta)
     date = prompt.ask('Which date would you like to make the appointment (follow dd/mm/yyyy format)'.colorize(:cyan), required: true)
-    doctor_name = prompt.select('Please select the doctor'.colorize(:cyan), %w[Lucy Peter John Sarah])
+    doctor_name = prompt.select('Please select the doctor'.colorize(:cyan), doctor_list)
     loop do
       time = prompt.ask('What time would you like to make an appointment (follow hh.mm format)'.colorize(:cyan), required: true).to_i
       if time < start_time || time > end_time
@@ -45,7 +46,7 @@ loop do
     date = prompt.ask('Enter the date would you like to view'.colorize(:cyan), required: true)
     view_details(date, appointments)
   when 'Delete'
-    doctor_name = prompt.select('Please select the doctor to delete'.colorize(:cyan), %w[Lucy Peter John Sarah])
+    doctor_name = prompt.select('Please select the doctor to delete'.colorize(:cyan), doctor_list)
     date = prompt.ask('Please enter the date to delete the appointment'.colorize(:cyan), required: true)
     time = prompt.ask('Please enter the time to delete the appointment'.colorize(:cyan), required: true)
     if delete_appointment(doctor_name, date, time, appointments)

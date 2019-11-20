@@ -10,9 +10,9 @@ end
 # create appointment
 def create_details(doctor_name, date, time)
   prompt = TTY::Prompt.new
-  full_name = prompt.ask("Enter your full name".colorize(:cyan),required: true)
-  dob = prompt.ask('Enter your date of birth (follow dd/mm/yyyy format)'.colorize(:cyan),required: true)
-  mobile_num = prompt.ask('Enter your mobile number'.colorize(:cyan),required: true)
+  full_name = prompt.ask('Enter your full name'.colorize(:cyan), required: true)
+  dob = prompt.ask('Enter your date of birth (follow dd/mm/yyyy format)'.colorize(:cyan), required: true)
+  mobile_num = prompt.ask('Enter your mobile number'.colorize(:cyan), required: true)
   appointment = Appointment.new(doctor_name, date, time, full_name, dob, mobile_num)
 end
 
@@ -77,5 +77,3 @@ rescue StandardError => e
   puts appointments.to_s
   puts appointments.length
 end
-
-
