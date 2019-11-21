@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'appointment-class'
-# require_relative 'main'
 require_relative 'methods'
 
 def check_availability_available_scenario
@@ -46,5 +45,5 @@ def check_availability_not_available_scenario
       end
   end
 
-  check_availability_available_scenario
-  check_availability_not_available_scenario
+check_availability_available_scenario
+check_availability_not_available_scenario

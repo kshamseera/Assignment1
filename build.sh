@@ -7,7 +7,8 @@ mkdir -p dist
 cp ./main.rb ./dist
 cp ./appointment-class.rb ./dist
 cp ./methods.rb ./dist
-
+cp ./delete-test-file.rb ./dist
+cp ./availability-test-file.rb ./dist
 
 # install required gems
 gem install colorize
