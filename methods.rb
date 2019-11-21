@@ -38,7 +38,7 @@ def view_details(date, appointments)
     next unless app.date == date
 
     match_found_flag = true
-    puts "\nAvailable Appointments :".colorize(:magenta)
+    puts "\nAvailable Appointments:".colorize(:magenta)
     puts "\nDoctor: #{app.doctor_name} | Patient_Name: #{app.full_name} | Date: #{app.date} | Time: #{app.time}".colorize(:green)
   end
   unless match_found_flag

@@ -39,3 +39,4 @@ for gem installation refer ``` ./build.sh```  file
 * View
 * Delete
 * Exit 
+* I included two test files. one for checking the availability of appointments. Other one for testing the delete feature
