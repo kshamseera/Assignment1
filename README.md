@@ -1,8 +1,8 @@
 
-# Terminal Application - Easy Doctor Appointment 
+# Terminal Application - Easy Appointment 
 ----
 
-Easy Doctor appointment is a terminal application to help doctors and clinics for hassle-free appointment booking of their patients. Main Feature of this application are create new appointment, view all appointments and delete appointment.
+Easy appointment is a terminal application to help doctors and clinics for hassle-free appointment booking of their patients. Main Feature of this application are create new appointment, view all appointments and delete appointment.
 
 
 This application is developed using ruby language.
